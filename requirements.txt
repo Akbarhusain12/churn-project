@@ -1,4 +1,4 @@
--e .
+# -e .
 pandas
 numpy
 scikit-learn
@@ -11,3 +11,4 @@ sqlalchemy
 pyyaml
 jupyter
 setuptools
+dill
