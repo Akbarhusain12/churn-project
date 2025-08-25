@@ -57,7 +57,7 @@ CHURN-PROJECT/
 
 ## 🛠️ Technologies Used
 
-  - **Python 3.x**
+  - **Python 3.12.8**
   - **Pandas & NumPy**: For efficient data manipulation and numerical operations.
   - **Scikit-learn**: For data preprocessing, modeling, and evaluation.
   - **Matplotlib & Seaborn**: For data visualization and exploratory analysis.
@@ -74,7 +74,7 @@ Follow these steps to set up and run the project locally.
 **1. Clone the repository:**
 
 ```bash
-git clone https://github.com/your-username/CHURN-PROJECT.git
+git clone https://github.com/Akbarhusain12/churn-project.git
 cd CHURN-PROJECT
 ```
 
