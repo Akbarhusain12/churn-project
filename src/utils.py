@@ -22,26 +22,43 @@ def save_object(file_path, obj):
         raise CustomException(f"Error occurred while saving object at {file_path}", e)
 
 
-def evaluate_model(X_train, y_train, X_test, y_test, models, param):
+def evaluate_model(X_train, y_train, X_test, y_test, models, param, cv=3):
+    """
+    Evaluate multiple models with optional hyperparameter tuning using GridSearchCV.
+    Returns:
+        model_report: dict with metrics for each model
+        fitted_models: dict with fitted model objects
+    """
     try:
         model_report = {}
+        fitted_models = {}
+
         for model_name, model in models.items():
-            param_grid = param.get(model_name, {})
+            param_grid = param.get(model_name, None)
 
-            gs = GridSearchCV(model,param_grid,cv=5)
-            gs.fit(X_train,y_train)
+            if param_grid:  # If hyperparameters provided, use GridSearchCV
+                gs = GridSearchCV(model, param_grid, cv=cv, n_jobs=-1)
+                gs.fit(X_train, y_train)
+                best_model = gs.best_estimator_
+            else:
+                model.fit(X_train, y_train)
+                best_model = model
 
-            model.set_params(**gs.best_params_)
-            model.fit(X_train, y_train)
+            # Store fitted model
+            fitted_models[model_name] = best_model
 
-            y_pred = model.predict(X_test)
+            # Predictions and metrics
+            y_pred = best_model.predict(X_test)
             model_report[model_name] = {
                 "accuracy": accuracy_score(y_test, y_pred),
                 "classification_report": classification_report(y_test, y_pred),
                 "confusion_matrix": confusion_matrix(y_test, y_pred)
             }
-        return model_report
-    
+
+            logging.info(f"Model {model_name} evaluated with accuracy: {model_report[model_name]['accuracy']}")
+
+        return model_report, fitted_models
+
     except Exception as e:
         logging.error("Error occurred while evaluating models")
-        raise CustomException("Error occurred while evaluating models", e)
+        raise CustomException("Error occurred while evaluating models", e, sys)

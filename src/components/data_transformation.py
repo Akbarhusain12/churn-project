@@ -30,10 +30,10 @@ class DataTransformation:
                 ('scaler', StandardScaler())
             ])
 
+            # Removed scaling for categorical features
             categorical_transformer = Pipeline(steps=[
                 ('imputer', SimpleImputer(strategy='most_frequent')),
-                ('onehot', OneHotEncoder(handle_unknown='ignore')),
-                ('scaler', StandardScaler(with_mean=False))
+                ('onehot', OneHotEncoder(handle_unknown='ignore'))
             ])
 
             preprocessor = ColumnTransformer(
@@ -58,9 +58,19 @@ class DataTransformation:
 
             target_column_name = 'Churn Label'
 
-            # Extract features
-            numeric_features = [col for col in train_df.columns if col != target_column_name and train_df[col].dtype in ['int64', 'float64']]
-            categorical_features = [col for col in train_df.columns if col != target_column_name and train_df[col].dtype == 'object']
+            # Drop target-related columns to prevent leakage
+            leakage_columns = ['Churn Score', 'Customer Status', 'Churn Category', 'Churn Reason']
+
+            numeric_features = [
+                col for col in train_df.columns 
+                if col not in [target_column_name] + leakage_columns 
+                and train_df[col].dtype in ['int64', 'float64']
+            ]
+            categorical_features = [
+                col for col in train_df.columns 
+                if col not in [target_column_name] + leakage_columns 
+                and train_df[col].dtype == 'object'
+            ]
 
             logging.info(f"Numeric features: {numeric_features}")
             logging.info(f"Categorical features: {categorical_features}")
@@ -68,10 +78,10 @@ class DataTransformation:
             logging.info("Obtaining preprocessing object")
             preprocessing_obj = self.get_data_transformer_object(numeric_features, categorical_features)
 
-            input_feature_train_df = train_df.drop(columns=[target_column_name], axis=1)
+            input_feature_train_df = train_df.drop(columns=[target_column_name]+leakage_columns)
             target_feature_train_df = train_df[target_column_name]
 
-            input_feature_test_df = test_df.drop(columns=[target_column_name], axis=1)
+            input_feature_test_df = test_df.drop(columns=[target_column_name]+leakage_columns)
             target_feature_test_df = test_df[target_column_name]
 
             logging.info("Applying preprocessing object on training and testing dataframes")
@@ -79,8 +89,7 @@ class DataTransformation:
             input_feature_train_arr = preprocessing_obj.fit_transform(input_feature_train_df)
             input_feature_test_arr = preprocessing_obj.transform(input_feature_test_df)
 
-           
-           
+            # Convert sparse matrices to dense if needed
             if hasattr(input_feature_train_arr, "toarray"):
                 input_feature_train_arr = input_feature_train_arr.toarray()
             if hasattr(input_feature_test_arr, "toarray"):
@@ -88,10 +97,6 @@ class DataTransformation:
 
             train_arr = np.c_[input_feature_train_arr, target_feature_train_df.to_numpy().reshape(-1, 1)]
             test_arr = np.c_[input_feature_test_arr, target_feature_test_df.to_numpy().reshape(-1, 1)]
-
-
-
-
 
             logging.info("Saving preprocessing object")
             save_object(
