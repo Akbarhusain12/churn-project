@@ -79,7 +79,8 @@ class DataTransformation:
             input_feature_train_arr = preprocessing_obj.fit_transform(input_feature_train_df)
             input_feature_test_arr = preprocessing_obj.transform(input_feature_test_df)
 
-            # Ensure dense numpy arrays
+           
+           
             if hasattr(input_feature_train_arr, "toarray"):
                 input_feature_train_arr = input_feature_train_arr.toarray()
             if hasattr(input_feature_test_arr, "toarray"):
