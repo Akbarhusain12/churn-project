@@ -41,7 +41,24 @@ class ModelTrainer:
                 "DecisionTree": DecisionTreeClassifier()                
             }
 
-            model_report = evaluate_model(X_train=X_train, y_train=y_train, X_test=X_test, y_test=y_test, models=models)
+            hyperparameter_tuning = {
+                "RandomForest": {
+                    "n_estimators": [100, 200],
+                    "max_depth": [None, 10, 20]
+                },
+                "LogisticRegression": {
+                    "C": [0.1, 1, 10]
+                },
+                "SVC": {
+                    "C": [0.1, 1, 10],
+                    "kernel": ["linear", "rbf"]
+                },
+                "DecisionTree": {
+                    "max_depth": [None, 10, 20]
+                }
+            }
+
+            model_report = evaluate_model(X_train=X_train, y_train=y_train, X_test=X_test, y_test=y_test, models=models, param=hyperparameter_tuning)
 
             # To get best model score and name from model_report
             best_model_name = None
@@ -67,7 +84,7 @@ class ModelTrainer:
             accuracy = accuracy_score(y_test, predicted)
             return accuracy
         
-        
+
         except Exception as e:
             logging.error(f"Error occurred while training model: {e}")
             raise CustomException("Error occurred while training model", sys)
