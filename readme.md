@@ -1,111 +1,102 @@
-# Telco Customer Churn Prediction
+Telco Customer Churn Prediction
+This project is an end-to-end machine learning solution for predicting customer churn in a telecommunications company. It features a modular pipeline for data processing and model training, and includes a Flask web application for real-time inference.
 
-This project is an end-to-end machine learning solution for predicting customer churn in a telecommunications company. It follows a modular and scalable structure, from data ingestion and transformation to model training and prediction pipelines.
-
------
-
-## 🚀 Workflow
-
+🚀 Key Features & Workflow
 The project is structured into several key stages:
 
-1.  **Data Ingestion**: Fetches the raw dataset, performs a train-test split, and stores the resulting CSV files in the `artifacts` directory.
-2.  **Data Transformation**: Applies a preprocessing pipeline to the training data. This includes handling missing values, encoding categorical features (both nominal and ordinal), and scaling numerical features to prepare the data for modeling.
-3.  **Model Training**: Trains multiple classification models (e.g., Logistic Regression, Random Forest, XGBoost) on the transformed data. It evaluates them to identify the best-performing model and saves the corresponding model object (`.pkl` file) in the `artifacts` directory.
-4.  **Training Pipeline**: A master script that orchestrates the entire workflow by sequentially running the data ingestion, transformation, and model training components.
-5.  **Prediction Pipeline**: A separate pipeline designed for inference. It takes new, unseen data, applies the same preprocessing steps used during training, and uses the saved model to predict churn.
+Data Ingestion: Fetches the raw dataset, performs a train-test split, and stores the resulting CSV files in the artifacts directory.
 
------
+Data Transformation: Applies a preprocessing pipeline to the training data. This includes handling missing values, encoding categorical features, and scaling numerical features.
 
-## 📁 Project Structure
+Model Training: Trains multiple classification models (e.g., Logistic Regression, Random Forest, XGBoost) and saves the best-performing model object (.pkl file) in the artifacts directory.
 
+Prediction Pipeline: A separate pipeline designed for inference. It loads the saved preprocessor and model to make predictions on new data.
+
+Web Application (Flask): A user-friendly interface built with Flask that takes customer data as input and displays the churn prediction result in real-time.
+
+📁 Project Structure
 The project follows a modular structure to ensure scalability and maintainability.
 
-```
 CHURN-PROJECT/
 │
-├── artifacts/           # Stores outputs like datasets and models
-├── logs/                # Stores log files for debugging and monitoring
-├── notebooks/           # Jupyter notebooks for experimentation
-│   ├── 01_eda.ipynb
-│   ├── 02_feature_eng.ipynb
-│   └── 03_modeling.ipynb
+├── artifacts/              # Stores outputs like datasets and models
+├── logs/                   # Stores log files for debugging
+├── notebooks/              # Jupyter notebook for experimentation
+│   ├── data/               # Contains the raw dataset
+│   │   └── telco.csv
+│   └── EDA_Churn_prediction.ipynb
 │
-├── src/                 # Source code for the project
+├── src/                    # Source code for the project
 │   ├── __init__.py
-│   ├── components/      # Core ML components (modular scripts)
+│   ├── components/         # Core ML components (modular scripts)
 │   │   ├── __init__.py
 │   │   ├── data_ingestion.py
 │   │   ├── data_transformation.py
 │   │   └── model_trainer.py
 │   │
-│   ├── pipeline/        # Manages the end-to-end pipelines
+│   ├── pipeline/           # Manages the prediction pipeline
 │   │   ├── __init__.py
-│   │   ├── predict_pipeline.py
-│   │   └── train_pipeline.py
+│   │   └── predict_pipeline.py
 │   │
-│   ├── exception.py     # Custom exception handling
-│   ├── logger.py        # Logging configuration
-│   └── utils.py         # Utility functions (e.g., save/load objects)
+│   ├── exception.py        # Custom exception handling
+│   ├── logger.py           # Logging configuration
+│   └── utils.py            # Utility functions
 │
-├── .gitignore           # Files to be ignored by Git
-├── README.md            # Project documentation
-├── requirements.txt     # Lists all project dependencies
-└── setup.py             # Makes the project installable as a package
-```
+├── templates/              # HTML templates for the Flask app
+│   ├── index.html
+│   └── result.html
+│
+├── app.py                  # Main Flask application file
+├── .gitignore              # Files to be ignored by Git
+├── README.md               # Project documentation
+├── requirements.txt        # Project dependencies
+└── setup.py                # Makes the project installable as a package
 
------
+🛠️ Technologies Used
+Python 3.12.8
 
-## 🛠️ Technologies Used
+Flask: For the web application framework.
 
-  - **Python 3.12.8**
-  - **Pandas & NumPy**: For efficient data manipulation and numerical operations.
-  - **Scikit-learn**: For data preprocessing, modeling, and evaluation.
-  - **Matplotlib & Seaborn**: For data visualization and exploratory analysis.
-  - **Dill**: For serializing and saving Python objects (like preprocessor pipelines).
-  - **Jupyter Notebook**: For interactive development and EDA.
-  - **Custom Logging & Exception Handling**: For robust error management and monitoring.
+Pandas & NumPy: For efficient data manipulation.
 
------
+Scikit-learn: For data preprocessing, modeling, and evaluation.
 
-## ⚙️ Setup and How to Run
+Matplotlib & Seaborn: For data visualization.
 
+Dill: For serializing Python objects.
+
+Jupyter Notebook: For interactive development and EDA.
+
+⚙️ Setup and How to Run
 Follow these steps to set up and run the project locally.
 
-**1. Clone the repository:**
+1. Clone the repository:
 
-```bash
 git clone https://github.com/Akbarhusain12/churn-project.git
-cd CHURN-PROJECT
-```
+cd churn-project
 
-**2. Create a virtual environment (recommended):**
+2. Create a virtual environment (recommended):
 
-```bash
 python -m venv venv
 source venv/bin/activate   # On Windows, use `venv\Scripts\activate`
-```
 
-**3. Install the required dependencies:**
-The `requirements.txt` file contains all the necessary packages.
+3. Install the required dependencies:
 
-```bash
 pip install -r requirements.txt
-```
 
-**4. Run the complete training pipeline:**
-This single command will execute data ingestion, data transformation, and model training in sequence.
+4. Run the data and training pipeline:
+Execute the following components in order to process the data and train the model. The resulting artifacts will be saved in the artifacts folder.
 
-```bash
-python src/pipeline/train_pipeline.py
-```
+python src/components/data_ingestion.py
+python src/components/data_transformation.py
+python src/components/model_trainer.py
 
-After successful execution, the trained model and preprocessor object will be saved in the `artifacts` folder.
+5. Run the Flask application:
+Start the web server to use the prediction interface.
 
-**5. Run the prediction pipeline (for inference):**
-To make predictions on new data, you would use the `predict_pipeline.py`. (Note: This may require setting up an interface like a simple web form or a script that accepts input data).
+python app.py
 
------
+Navigate to http://127.0.0.1:5000 in your web browser to access the application.
 
-## ✍️ Author
-
-  - Akbarhusain
+✍️ Author
+Akbarhusain
