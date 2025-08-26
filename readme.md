@@ -1,7 +1,3 @@
-Of course\! Here is the content formatted as a professional README file.
-
------
-
 # 📌 Telco Customer Churn Prediction
 
 An end-to-end machine learning project to predict customer churn with a modular pipeline and a Flask web application for real-time inference.
