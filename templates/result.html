@@ -1,163 +1,276 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Churn Prediction Dashboard</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <style>
-      body {
-        font-family: "Segoe UI", Arial, sans-serif;
-        background: #f4f6f8;
-        margin: 0;
+<head>
+  <meta charset="UTF-8" />
+  <title>Churn Prediction Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body { font-family: "Segoe UI", Arial, sans-serif; background: #f4f6f8; margin: 0; }
+    .container { max-width: 800px; margin: 40px auto; background: #fff; border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); padding: 32px; }
+    h1 { text-align: center; color: #2d3e50; }
+    form { display: grid; grid-template-columns: 1fr 1fr; gap: 16px 24px; }
+    label { font-weight: 500; color: #2d3e50; }
+    input, select { padding: 8px; border: 1px solid #cfd8dc; border-radius: 5px; width: 100%; }
+    button { grid-column: span 2; background: #1976d2; color: #fff; border: none;
+      padding: 12px; border-radius: 5px; font-size: 1rem; cursor: pointer; transition: background 0.2s; }
+    button:hover { background: #1565c0; }
+    .result { margin-top: 24px; padding: 16px; background: #e3f2fd; border-radius: 5px;
+      text-align: center; font-size: 1.1rem; grid-column: span 2; }
+    .advanced { display: none; grid-column: span 2; margin-top: 20px; }
+    .toggle-btn { grid-column: span 2; background: #555; }
+  </style>
+  <script>
+    function toggleAdvanced() {
+      const section = document.getElementById("advanced-section");
+      const btn = document.getElementById("toggle-btn");
+      if (section.style.display === "none") {
+        section.style.display = "grid";
+        btn.textContent = "Hide Advanced Features";
+      } else {
+        section.style.display = "none";
+        btn.textContent = "Show Advanced Features";
       }
-      .container {
-        max-width: 700px;
-        margin: 40px auto;
-        background: #fff;
-        border-radius: 10px;
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-        padding: 32px;
-      }
-      h1 {
-        text-align: center;
-        color: #2d3e50;
-      }
-      form {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 16px 24px;
-      }
-      label {
-        font-weight: 500;
-        color: #2d3e50;
-      }
-      input,
-      select {
-        padding: 8px;
-        border: 1px solid #cfd8dc;
-        border-radius: 5px;
-        width: 100%;
-      }
-      button {
-        grid-column: span 2;
-        background: #1976d2;
-        color: #fff;
-        border: none;
-        padding: 12px;
-        border-radius: 5px;
-        font-size: 1rem;
-        cursor: pointer;
-        transition: background 0.2s;
-      }
-      button:hover {
-        background: #1565c0;
-      }
-      .result {
-        margin-top: 24px;
-        padding: 16px;
-        background: #e3f2fd;
-        border-radius: 5px;
-        text-align: center;
-        font-size: 1.1rem;
-        grid-column: span 2;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="container">
-      <h1>Churn Prediction</h1>
-      <form method="POST" action="/predict">
-        <!-- Demographics -->
-        <label for="gender">Gender:</label>
-        <select name="gender" id="gender" required>
-          <option value="">Select...</option>
-          <option value="Male">Male</option>
-          <option value="Female">Female</option>
+    }
+  </script>
+</head>
+<body>
+  <div class="container">
+    <h1>Churn Prediction</h1>
+    <form method="POST" action="/predict">
+      <!-- 🔹 Primary Fields (10 most important) -->
+      <label for="gender">Gender:</label>
+      <select name="gender" id="gender" required>
+        <option value="">Select...</option>
+        <option value="Male">Male</option>
+        <option value="Female">Female</option>
+      </select>
+
+      <label for="age">Age:</label>
+      <input type="number" name="age" id="age" min="18" max="100" required />
+
+      <label for="married">Married:</label>
+      <select name="married" id="married" required>
+        <option value="">Select...</option>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+      </select>
+
+      <label for="dependents">Dependents:</label>
+      <select name="dependents" id="dependents" required>
+        <option value="">Select...</option>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+      </select>
+
+      <label for="phone_service">Phone Service:</label>
+      <select name="phone_service" id="phone_service" required>
+        <option value="">Select...</option>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+      </select>
+
+      <label for="internet_service">Internet Service:</label>
+      <select name="internet_service" id="internet_service" required>
+        <option value="">Select...</option>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+      </select>
+
+      <label for="contract">Contract Type:</label>
+      <select name="contract" id="contract" required>
+        <option value="">Select...</option>
+        <option value="Month-to-month">Month-to-month</option>
+        <option value="One year">One year</option>
+        <option value="Two year">Two year</option>
+      </select>
+
+      <label for="payment_method">Payment Method:</label>
+      <select name="payment_method" id="payment_method" required>
+        <option value="">Select...</option>
+        <option value="Credit Card">Credit Card</option>
+        <option value="Bank Transfer">Bank Transfer</option>
+        <option value="Mailed Check">Mailed Check</option>
+        <option value="Electronic Check">Electronic Check</option>
+      </select>
+
+      <label for="monthly_charges">Monthly Charges:</label>
+      <input type="number" name="monthly_charges" id="monthly_charges" step="0.01" required />
+
+      <label for="tenure">Tenure (Months):</label>
+      <input type="number" name="tenure" id="tenure" min="0" required />
+
+      <!-- 🔹 Toggle Button -->
+      <button type="button" id="toggle-btn" class="toggle-btn" onclick="toggleAdvanced()">Show Advanced Features</button>
+
+      <!-- 🔹 Advanced Section (35 defaults, hidden by default) -->
+      <div id="advanced-section" class="advanced">
+        <label for="customer_id">Customer ID:</label>
+        <input type="text" name="customer_id" id="customer_id" value="CUST0001" />
+
+        <label for="number_of_dependents">Number of Dependents:</label>
+        <input type="number" name="number_of_dependents" id="number_of_dependents" value="0" />
+
+        <label for="zip_code">Zip Code:</label>
+        <input type="number" name="zip_code" id="zip_code" value="12345" />
+
+        <label for="latitude">Latitude:</label>
+        <input type="number" step="0.01" name="latitude" id="latitude" value="0.0" />
+
+        <label for="longitude">Longitude:</label>
+        <input type="number" step="0.01" name="longitude" id="longitude" value="0.0" />
+
+        <label for="population">Population:</label>
+        <input type="number" name="population" id="population" value="1000" />
+
+        <label for="num_referrals">Number of Referrals:</label>
+        <input type="number" name="num_referrals" id="num_referrals" value="0" />
+
+        <label for="avg_long_distance">Avg Monthly Long Distance Charges:</label>
+        <input type="number" step="0.01" name="avg_long_distance" id="avg_long_distance" value="20.0" />
+
+        <label for="avg_gb_download">Avg Monthly GB Download:</label>
+        <input type="number" step="0.01" name="avg_gb_download" id="avg_gb_download" value="10.0" />
+
+        <label for="total_refunds">Total Refunds:</label>
+        <input type="number" step="0.01" name="total_refunds" id="total_refunds" value="0.0" />
+
+        <label for="total_extra_data">Total Extra Data Charges:</label>
+        <input type="number" step="0.01" name="total_extra_data" id="total_extra_data" value="0.0" />
+
+        <label for="total_long_distance">Total Long Distance Charges:</label>
+        <input type="number" step="0.01" name="total_long_distance" id="total_long_distance" value="50.0" />
+
+        <label for="satisfaction_score">Satisfaction Score:</label>
+        <input type="number" name="satisfaction_score" id="satisfaction_score" value="3" />
+
+        <label for="cltv">CLTV:</label>
+        <input type="number" name="cltv" id="cltv" value="1000" />
+
+        <label for="under_30">Under 30:</label>
+        <select name="under_30" id="under_30">
+          <option value="No" selected>No</option>
+          <option value="Yes">Yes</option>
         </select>
 
-        <label for="age">Age:</label>
-        <input type="number" name="age" id="age" min="18" max="100" required />
-
-        <label for="married">Married:</label>
-        <select name="married" id="married" required>
-          <option value="">Select...</option>
+        <label for="senior_citizen">Senior Citizen:</label>
+        <select name="senior_citizen" id="senior_citizen">
+          <option value="No" selected>No</option>
           <option value="Yes">Yes</option>
+        </select>
+
+        <label for="country">Country:</label>
+        <input type="text" name="country" id="country" value="USA" />
+
+        <label for="state">State:</label>
+        <input type="text" name="state" id="state" value="CA" />
+
+        <label for="city">City:</label>
+        <input type="text" name="city" id="city" value="San Francisco" />
+
+        <label for="quarter">Quarter:</label>
+        <select name="quarter" id="quarter">
+          <option value="Q1" selected>Q1</option>
+          <option value="Q2">Q2</option>
+          <option value="Q3">Q3</option>
+          <option value="Q4">Q4</option>
+        </select>
+
+        <label for="referred_friend">Referred a Friend:</label>
+        <select name="referred_friend" id="referred_friend">
+          <option value="No" selected>No</option>
+          <option value="Yes">Yes</option>
+        </select>
+
+        <label for="offer">Offer:</label>
+        <select name="offer" id="offer">
+          <option value="None" selected>None</option>
+          <option value="Offer A">Offer A</option>
+          <option value="Offer B">Offer B</option>
+          <option value="Offer C">Offer C</option>
+        </select>
+
+        <label for="multiple_lines">Multiple Lines:</label>
+        <select name="multiple_lines" id="multiple_lines">
+          <option value="No" selected>No</option>
+          <option value="Yes">Yes</option>
+        </select>
+
+        <label for="internet_type">Internet Type:</label>
+        <select name="internet_type" id="internet_type">
+          <option value="Fiber" selected>Fiber</option>
+          <option value="DSL">DSL</option>
+          <option value="Cable">Cable</option>
+        </select>
+
+        <label for="online_security">Online Security:</label>
+        <select name="online_security" id="online_security">
+          <option value="No" selected>No</option>
+          <option value="Yes">Yes</option>
+        </select>
+
+        <label for="online_backup">Online Backup:</label>
+        <select name="online_backup" id="online_backup">
+          <option value="No" selected>No</option>
+          <option value="Yes">Yes</option>
+        </select>
+
+        <label for="device_protection">Device Protection:</label>
+        <select name="device_protection" id="device_protection">
+          <option value="No" selected>No</option>
+          <option value="Yes">Yes</option>
+        </select>
+
+        <label for="premium_support">Premium Tech Support:</label>
+        <select name="premium_support" id="premium_support">
+          <option value="No" selected>No</option>
+          <option value="Yes">Yes</option>
+        </select>
+
+        <label for="streaming_tv">Streaming TV:</label>
+        <select name="streaming_tv" id="streaming_tv">
+          <option value="Yes" selected>Yes</option>
           <option value="No">No</option>
         </select>
 
-        <label for="dependents">Dependents:</label>
-        <select name="dependents" id="dependents" required>
-          <option value="">Select...</option>
-          <option value="Yes">Yes</option>
+        <label for="streaming_movies">Streaming Movies:</label>
+        <select name="streaming_movies" id="streaming_movies">
+          <option value="Yes" selected>Yes</option>
           <option value="No">No</option>
         </select>
 
-        <!-- Services -->
-        <label for="phone_service">Phone Service:</label>
-        <select name="phone_service" id="phone_service" required>
-          <option value="">Select...</option>
-          <option value="Yes">Yes</option>
+        <label for="streaming_music">Streaming Music:</label>
+        <select name="streaming_music" id="streaming_music">
+          <option value="Yes" selected>Yes</option>
           <option value="No">No</option>
         </select>
 
-        <label for="internet_service">Internet Service:</label>
-        <select name="internet_service" id="internet_service" required>
-          <option value="">Select...</option>
-          <option value="Yes">Yes</option>
+        <label for="unlimited_data">Unlimited Data:</label>
+        <select name="unlimited_data" id="unlimited_data">
+          <option value="Yes" selected>Yes</option>
           <option value="No">No</option>
         </select>
 
-        <label for="contract">Contract Type:</label>
-        <select name="contract" id="contract" required>
-          <option value="">Select...</option>
-          <option value="Month-to-month">Month-to-month</option>
-          <option value="One year">One year</option>
-          <option value="Two year">Two year</option>
+        <label for="paperless_billing">Paperless Billing:</label>
+        <select name="paperless_billing" id="paperless_billing">
+          <option value="Yes" selected>Yes</option>
+          <option value="No">No</option>
         </select>
-
-        <label for="payment_method">Payment Method:</label>
-        <select name="payment_method" id="payment_method" required>
-          <option value="">Select...</option>
-          <option value="Credit Card">Credit Card</option>
-          <option value="Bank Transfer">Bank Transfer</option>
-          <option value="Mailed Check">Mailed Check</option>
-          <option value="Electronic Check">Electronic Check</option>
-        </select>
-
-        <!-- Charges -->
-        <label for="monthly_charges">Monthly Charges:</label>
-        <input
-          type="number"
-          name="monthly_charges"
-          id="monthly_charges"
-          step="0.01"
-          required
-        />
-
-        <label for="tenure">Tenure (Months):</label>
-        <input type="number" name="tenure" id="tenure" min="0" required />
-
-        <button type="submit">Predict Churn</button>
-      </form>
-
-      {% if prediction %}
-      <div class="result">
-        <strong>Prediction:</strong> {{ prediction }} <br /><br />
-
-        {% if prediction == "Yes" %}
-        <p style="color: red; font-weight: 500">
-          ⚠️ This customer is likely to churn. Consider offering retention
-          incentives like discounts, personalized offers, or loyalty rewards to
-          retain them.
-        </p>
-        {% elif prediction == "No" %}
-        <p style="color: green; font-weight: 500">
-          ✅ This customer is unlikely to churn. Focus on upselling premium
-          services and maintaining engagement to maximize long-term value.
-        </p>
-        {% endif %}
       </div>
+
+      <button type="submit">Predict Churn</button>
+    </form>
+
+    {% if prediction %}
+    <div class="result">
+      <strong>Prediction:</strong> {{ prediction }} <br /><br />
+      {% if prediction == "Yes" %}
+      <p style="color: red; font-weight: 500">⚠️ This customer is likely to churn. Consider retention incentives.</p>
+      {% elif prediction == "No" %}
+      <p style="color: green; font-weight: 500">✅ This customer is unlikely to churn. Focus on upselling and engagement.</p>
       {% endif %}
     </div>
-  </body>
+    {% endif %}
+  </div>
+</body>
 </html>

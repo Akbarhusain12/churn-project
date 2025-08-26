@@ -59,7 +59,7 @@ class DataTransformation:
             target_column_name = 'Churn Label'
 
             # Drop target-related columns to prevent leakage
-            leakage_columns = ['Churn Score', 'Customer Status', 'Churn Category', 'Churn Reason']
+            leakage_columns = ['Churn Score', 'Customer Status', 'Churn Category', 'Churn Reason','Customer ID']
 
             numeric_features = [
                 col for col in train_df.columns 
