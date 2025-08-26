@@ -140,5 +140,6 @@ Open your web browser and navigate to: 👉 **[http://127.0.0.1:5000](http://127
 **Akbar Husain**
 
   
-  - **LinkedIn**: `[linkedin.com/in/akbar-kadiwala/]`
+ - **LinkedIn**: [Akbar Husain](https://www.linkedin.com/in/akbar-kadiwala/)
+
   
