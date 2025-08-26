@@ -1,41 +1,57 @@
-import pickle
 from flask import Flask, render_template, request
-
-import numpy as np
 import pandas as pd
 
-from sklearn.preprocessing import StandardScaler
 from src.pipeline.predict_pipeline import CustomData, PredictPipeline   
 
-
 application = Flask(__name__)
-
 app = application
+
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('index.html')  
+
 
 @app.route('/predict', methods=['GET', 'POST'])
 def predict_datapoint():
     if request.method == 'GET':
-        return render_template('result.html')
+        return render_template('result.html')   # Show empty form initially
     else:
-        # Wrap user inputs with CustomData
-        data = CustomData(
-            gender=request.form['gender'],
-            age=request.form['age'],
-            monthly_charges=request.form['monthly_charges'],
-            contract=request.form['contract']
-        )
+        try:
+            # ✅ Use CustomData class (instead of manually building dictionary)
+            custom_data = CustomData(
+                gender=request.form.get("gender"),
+                age=request.form.get("age"),
+                monthly_charges=request.form.get("monthly_charges"),
+                contract=request.form.get("contract")
+            )
 
-        pred_df = data.get_data_as_dataframe()
-        print(pred_df) 
+            # Convert to DataFrame
+            data_df = custom_data.get_data_as_dataframe()
 
-        predict_pipeline = PredictPipeline()
-        result = predict_pipeline.predict(data=pred_df)
+            # Run prediction
+            predict_pipeline = PredictPipeline()
+            result = predict_pipeline.predict(data=data_df)
 
-        return render_template('result.html', prediction=result[0])
+            # Business explanation
+            if result[0] == "Yes":
+                prediction_text = (
+                    "❌ The customer is likely to CHURN. "
+                    "Consider offering discounts, loyalty perks, or retention strategies."
+                )
+            else:
+                prediction_text = (
+                    "✅ The customer is NOT likely to churn. "
+                    "Keep engaging them with good service to maintain satisfaction."
+                )
+
+            return render_template('result.html', prediction=prediction_text)
+
+        except Exception as e:
+            return render_template(
+                'result.html',
+                prediction=f"⚠️ Error occurred: {str(e)}"
+            )
 
 
 if __name__ == "__main__":
