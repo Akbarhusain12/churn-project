@@ -19,25 +19,24 @@ def index():
 @app.route('/predict', methods=['GET', 'POST'])
 def predict_datapoint():
     if request.method == 'GET':
-        return render_template('Home.html')
+        return render_template('result.html')
     else:
+        # Wrap user inputs with CustomData
         data = CustomData(
-            data=pd.DataFrame(
-                {
-                    "gender": [request.form['gender']],
-                    "age": [request.form['age']],
-                    "monthly_charges": [request.form['monthly_charges']],
-                    "contract": [request.form['contract']]
-                }
-            )
+            gender=request.form['gender'],
+            age=request.form['age'],
+            monthly_charges=request.form['monthly_charges'],
+            contract=request.form['contract']
         )
+
         pred_df = data.get_data_as_dataframe()
-        print(pred_df)
+        print(pred_df) 
 
         predict_pipeline = PredictPipeline()
         result = predict_pipeline.predict(data=pred_df)
-        return render_template('index.html', predictions=result[0])
-    
+
+        return render_template('result.html', prediction=result[0])
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
