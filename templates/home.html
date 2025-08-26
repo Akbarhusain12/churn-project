@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Churn Price Prediction Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body { font-family: 'Segoe UI', Arial, sans-serif; background: #f4f6f8; margin: 0; }
+        .container { max-width: 600px; margin: 40px auto; background: #fff; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); padding: 32px; }
+        h1 { text-align: center; color: #2d3e50; }
+        form { display: flex; flex-direction: column; gap: 16px; }
+        label { font-weight: 500; color: #2d3e50; }
+        input, select { padding: 8px; border: 1px solid #cfd8dc; border-radius: 5px; }
+        button { background: #1976d2; color: #fff; border: none; padding: 12px; border-radius: 5px; font-size: 1rem; cursor: pointer; transition: background 0.2s; }
+        button:hover { background: #1565c0; }
+        .result { margin-top: 24px; padding: 16px; background: #e3f2fd; border-radius: 5px; text-align: center; font-size: 1.1rem; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Churn Price Prediction</h1>
+        <form method="POST" action="predict_datapoint">
+            <!-- Example input fields, adjust names/types to match your model -->
+            <label for="gender">Gender:</label>
+            <select name="gender" id="gender" required>
+                <option value="">Select...</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+            </select>
+
+            <label for="age">Age:</label>
+            <input type="number" name="age" id="age" min="18" max="100" required>
+
+            <label for="monthly_charges">Monthly Charges:</label>
+            <input type="number" name="monthly_charges" id="monthly_charges" step="0.01" required>
+
+            <label for="contract">Contract Type:</label>
+            <select name="contract" id="contract" required>
+                <option value="">Select...</option>
+                <option value="Month-to-month">Month-to-month</option>
+                <option value="One year">One year</option>
+                <option value="Two year">Two year</option>
+            </select>
+
+            <!-- Add more fields as needed for your model -->
+
+            <button type="submit">Predict Churn</button>
+        </form>
+
+        {% if prediction %}
+        <div class="result">
+            <strong>Prediction:</strong> {{ prediction }}
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
