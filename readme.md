@@ -17,16 +17,16 @@ An end-to-end machine learning project to predict customer churn with a modular 
 ## 📂 Project Structure
 
 The project follows a modular structure to ensure scalability and maintainability.
-
 ```
 CHURN-PROJECT/
 │
 ├── artifacts/              # Stores outputs like datasets and models
 ├── logs/                   # Stores log files for debugging
-├── notebooks/              # Jupyter notebook for experimentation
+├── notebooks/              # Jupyter notebooks for experimentation
 │   ├── data/
 │   │   └── telco.csv
-│   └── EDA_Churn_prediction.ipynb
+│   ├── EDA_Churn_prediction.ipynb
+│   └── model_training.ipynb
 │
 ├── src/                    # Source code for the project
 │   ├── __init__.py
