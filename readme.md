@@ -1,7 +1,3 @@
-Of course\! Here is the content formatted as a professional README file.
-
------
-
 # 📌 Telco Customer Churn Prediction
 
 An end-to-end machine learning project to predict customer churn with a modular pipeline and a Flask web application for real-time inference.
@@ -144,5 +140,6 @@ Open your web browser and navigate to: 👉 **[http://127.0.0.1:5000](http://127
 **Akbar Husain**
 
   
-  - **LinkedIn**: `[linkedin.com/in/akbar-kadiwala/]`
+ - **LinkedIn**: [Akbar Husain](https://www.linkedin.com/in/akbar-kadiwala/)
+
   
