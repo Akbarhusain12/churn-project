@@ -54,7 +54,7 @@ class ModelTrainer:
             # Find best model by accuracy
             best_model_name = max(model_report, key=lambda name: model_report[name]['accuracy'])
             best_model_score = model_report[best_model_name]['accuracy']
-            best_model = fitted_models[best_model_name]  # <-- already fitted
+            best_model = fitted_models[best_model_name]
 
             if best_model_score < 0.6:
                 raise CustomException("No best model found with accuracy greater than 60%")
