@@ -1,9 +1,3 @@
-Of course\! Adding insights from your Exploratory Data Analysis (EDA) is a fantastic way to showcase the depth of your work and provide context for the problem you're solving.
-
-Here is the fully updated `README.md`, now including a new **"📊 Data Insights"** section with your visualizations and brief explanations.
-
------
-
 # 📌 Telco Customer Churn Prediction
 
 An end-to-end machine learning project to predict customer churn with a modular pipeline and a Flask web application for real-time inference.
