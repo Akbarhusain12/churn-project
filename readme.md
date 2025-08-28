@@ -17,6 +17,7 @@ An end-to-end machine learning project to predict customer churn with a modular 
 ## 📂 Project Structure
 
 The project follows a modular structure to ensure scalability and maintainability.
+
 ```
 CHURN-PROJECT/
 │
@@ -126,6 +127,14 @@ Open your web browser and navigate to: 👉 **[http://127.0.0.1:5000](http://127
 
 -----
 
+## 🚀 Live Demo
+
+The application has been successfully deployed on Render. You can access the live prediction app here:
+
+👉 **Live App**: **[https://churn-project-qj8k.onrender.com](https://churn-project-qj8k.onrender.com)**
+
+-----
+
 ## ✨ Future Improvements
 
   - [ ] Add functionality for bulk prediction via CSV upload in the Flask app.
@@ -139,7 +148,4 @@ Open your web browser and navigate to: 👉 **[http://127.0.0.1:5000](http://127
 
 **Akbar Husain**
 
-  
- - **LinkedIn**: [Akbar Husain](https://www.linkedin.com/in/akbar-kadiwala/)
-
-  
+  - **LinkedIn**: [Akbar Husain](https://www.linkedin.com/in/akbar-kadiwala/)
