@@ -1,4 +1,5 @@
 # -e .
+gunicorn
 pandas
 numpy
 scikit-learn
@@ -11,3 +12,4 @@ jupyter
 setuptools
 dill
 flask
+
