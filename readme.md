@@ -21,19 +21,23 @@ An end-to-end machine learning project to predict customer churn with a modular 
 Key visualizations from the Exploratory Data Analysis (EDA) that highlight the factors influencing customer churn.
 
 ### Top Churn Reasons
-![Reason](images/Reason.png)
+<img width="1465" height="705" alt="Image" src="https://github.com/user-attachments/assets/f036563d-b6d7-4147-ad7b-da9804b47a53" />
+
 *Competitor-related factors, such as better offers and devices, are the primary drivers of customer churn.*
 
 ### Churn Categories
-![Category](images/Category.png)
+<img width="1158" height="700" alt="Image" src="https://github.com/user-attachments/assets/a13c131f-b74e-4966-bccd-9344b4c04629" />
+
 *When grouped, 'Competitor' actions are the leading cause of churn, followed by 'Attitude' and 'Dissatisfaction'.*
 
 ### Churn by Internet Type
-![Internet type](<images/Internet type.png>)
+<img width="844" height="745" alt="Image" src="https://github.com/user-attachments/assets/e1dc8730-97d4-41ea-a278-4394dd8491a8" />
+
 *Customers with Fiber Optic internet have the highest absolute number and proportion of churn compared to other connection types.*
 
 ### Churn by Offer Type
-![Offer](images/Offer.png)
+<img width="832" height="695" alt="Image" src="https://github.com/user-attachments/assets/f5a48c23-bb21-48cf-a36b-7867b10a05a2" />
+
 *This chart shows churn distribution across promotional offers, indicating which ones are more or less effective at retaining customers.*
 
 -----
@@ -161,13 +165,13 @@ The application has been successfully deployed on Render. You can access the liv
 
 Here's a screenshot of the successful deployment logs on Render, showing the service going live:
 
-![alt text](images/Server.png)
+<img width="1394" height="961" alt="Image" src="https://github.com/user-attachments/assets/6092dd58-905f-4d75-b615-41767f803c22" />
 
 ### Prediction Interface
 
 A glimpse of the user-friendly interface for making real-time churn predictions:
 
-![alt text](images/Prediction.png)
+<img width="1889" height="1043" alt="Image" src="https://github.com/user-attachments/assets/c896ce54-aa00-4356-b13e-80a6814a76be" />
 
 -----
 
