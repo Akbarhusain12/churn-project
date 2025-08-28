@@ -1,3 +1,9 @@
+Excellent addition\! Including screenshots of the deployment logs and the live application's UI significantly enhances the project's credibility and showcases its functionality visually.
+
+Here's the updated `README.md` with the images embedded.
+
+-----
+
 # 📌 Telco Customer Churn Prediction
 
 An end-to-end machine learning project to predict customer churn with a modular pipeline and a Flask web application for real-time inference.
@@ -39,7 +45,7 @@ CHURN-PROJECT/
 │   │
 │   ├── pipeline/           # Manages the prediction pipeline
 │   │   ├── __init__.py
-│   │   └── predict_pipeline.py
+│   │   ├── predict_pipeline.py
 │   │
 │   ├── exception.py        # Custom exception handling
 │   ├── logger.py           # Logging configuration
@@ -132,6 +138,16 @@ Open your web browser and navigate to: 👉 **[http://127.0.0.1:5000](http://127
 The application has been successfully deployed on Render. You can access the live prediction app here:
 
 👉 **Live App**: **[https://churn-project-qj8k.onrender.com](https://churn-project-qj8k.onrender.com)**
+
+### Deployment Logs
+
+Here's a screenshot of the successful deployment logs on Render, showing the service going live:
+![Error](image.png)
+
+### Prediction Interface
+
+A glimpse of the user-friendly interface for making real-time churn predictions:
+![Error](image-1.png)
 
 -----
 
