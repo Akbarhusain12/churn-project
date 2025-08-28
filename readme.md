@@ -1,6 +1,6 @@
-Excellent addition\! Including screenshots of the deployment logs and the live application's UI significantly enhances the project's credibility and showcases its functionality visually.
+Of course\! Adding insights from your Exploratory Data Analysis (EDA) is a fantastic way to showcase the depth of your work and provide context for the problem you're solving.
 
-Here's the updated `README.md` with the images embedded.
+Here is the fully updated `README.md`, now including a new **"📊 Data Insights"** section with your visualizations and brief explanations.
 
 -----
 
@@ -17,6 +17,30 @@ An end-to-end machine learning project to predict customer churn with a modular 
   - **Model Training**: Trains multiple classifiers (Logistic Regression, Random Forest, XGBoost) and saves the best-performing model as a `.pkl` file.
   - **Prediction Pipeline**: Encapsulates the preprocessor and model for seamless inference on new, unseen data.
   - **Web Application**: A user-friendly Flask app with a simple UI for making real-time churn predictions.
+
+-----
+
+
+## 📊 Data Insights
+
+
+Key visualizations from the Exploratory Data Analysis (EDA) that highlight the factors influencing customer churn.
+
+### Top Churn Reasons
+![Reason](images/Reason.png)
+*Competitor-related factors, such as better offers and devices, are the primary drivers of customer churn.*
+
+### Churn Categories
+![Category](images/Category.png)
+*When grouped, 'Competitor' actions are the leading cause of churn, followed by 'Attitude' and 'Dissatisfaction'.*
+
+### Churn by Internet Type
+![Internet type](<images/Internet type.png>)
+*Customers with Fiber Optic internet have the highest absolute number and proportion of churn compared to other connection types.*
+
+### Churn by Offer Type
+![Offer](images/Offer.png)
+*This chart shows churn distribution across promotional offers, indicating which ones are more or less effective at retaining customers.*
 
 -----
 
@@ -45,7 +69,7 @@ CHURN-PROJECT/
 │   │
 │   ├── pipeline/           # Manages the prediction pipeline
 │   │   ├── __init__.py
-│   │   ├── predict_pipeline.py
+│   │   └── predict_pipeline.py
 │   │
 │   ├── exception.py        # Custom exception handling
 │   ├── logger.py           # Logging configuration
@@ -142,12 +166,14 @@ The application has been successfully deployed on Render. You can access the liv
 ### Deployment Logs
 
 Here's a screenshot of the successful deployment logs on Render, showing the service going live:
-![Error](image.png)
+
+\<img src="[https://storage.googleapis.com/agent-tools-public-test-bucket/user-assets/images/image\_02de5f\_03b1e3.png](https://www.google.com/search?q=https://storage.googleapis.com/agent-tools-public-test-bucket/user-assets/images/image_02de5f_03b1e3.png)"/\>
 
 ### Prediction Interface
 
 A glimpse of the user-friendly interface for making real-time churn predictions:
-![Error](image-1.png)
+
+\<img src="[https://storage.googleapis.com/agent-tools-public-test-bucket/user-assets/images/image\_02de5c\_2bb5f8.png](https://www.google.com/search?q=https://storage.googleapis.com/agent-tools-public-test-bucket/user-assets/images/image_02de5c_2bb5f8.png)"/\>
 
 -----
 
