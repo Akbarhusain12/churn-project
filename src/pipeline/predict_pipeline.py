@@ -17,7 +17,6 @@ class PredictPipeline:
             preprocessor_path = os.path.join("artifacts", "preprocessor.pkl")
             model = load_object(file_path=model_path)
             preprocessor = load_object(file_path=preprocessor_path)
-
             logging.info(f"Expected features: {preprocessor.feature_names_in_.tolist()}")
             logging.info(f"Received features: {data.columns.tolist()}")
 
