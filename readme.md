@@ -167,13 +167,13 @@ The application has been successfully deployed on Render. You can access the liv
 
 Here's a screenshot of the successful deployment logs on Render, showing the service going live:
 
-\<img src="[https://storage.googleapis.com/agent-tools-public-test-bucket/user-assets/images/image\_02de5f\_03b1e3.png](https://www.google.com/search?q=https://storage.googleapis.com/agent-tools-public-test-bucket/user-assets/images/image_02de5f_03b1e3.png)"/\>
+![alt text](images/Server.png)
 
 ### Prediction Interface
 
 A glimpse of the user-friendly interface for making real-time churn predictions:
 
-\<img src="[https://storage.googleapis.com/agent-tools-public-test-bucket/user-assets/images/image\_02de5c\_2bb5f8.png](https://www.google.com/search?q=https://storage.googleapis.com/agent-tools-public-test-bucket/user-assets/images/image_02de5c_2bb5f8.png)"/\>
+![alt text](images/Prediction.png)
 
 -----
 
