@@ -178,9 +178,7 @@ A glimpse of the user-friendly interface for making real-time churn predictions:
 ## ✨ Future Improvements
 
   - [ ] Add functionality for bulk prediction via CSV upload in the Flask app.
-  - [ ] Integrate SHAP or LIME for model explainability (XAI).
-  - [ ] Deploy the application using Docker and a cloud service (e.g., AWS, GCP, Heroku).
-  - [ ] Implement experiment tracking with tools like MLflow or DVC.
+  - [ ] Deploy the application using Docker and a cloud service (e.g., AWS, GCP, Heroku)
 
 -----
 
