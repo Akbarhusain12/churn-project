@@ -15,7 +15,7 @@ def index():
 @app.route('/predict', methods=['GET', 'POST'])
 def predict_datapoint():
     if request.method == 'GET':
-        return render_template('result.html')   # Show empty form initially
+        return render_template('result.html') 
     else:
         try:
             custom_data = CustomData(
