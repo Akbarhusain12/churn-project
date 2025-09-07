@@ -8,7 +8,7 @@ An end-to-end machine learning project to predict customer churn with a modular 
 
   - **Data Ingestion**: Loads the raw dataset, performs a train-test split, and saves the processed files.
   - **Data Transformation**: Handles missing values, encodes categorical variables, and scales numerical features using a preprocessing pipeline.
-  - **Model Training**: Trains multiple classifiers (Logistic Regression, Random Forest, XGBoost) and saves the best-performing model as a `.pkl` file.
+  - **Model Training**: Trains multiple classifiers (Logistic Regression, Random Forest, SVC, Decision Tree) and saves the best-performing model as a `.pkl` file.
   - **Prediction Pipeline**: Encapsulates the preprocessor and model for seamless inference on new, unseen data.
   - **Web Application**: A user-friendly Flask app with a simple UI for making real-time churn predictions.
 
